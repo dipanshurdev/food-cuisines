@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CiClock2 } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -18,11 +19,34 @@ const Recipe = () => {
   useEffect(() => {
     fetchResults();
   }, [params.name]);
+  // console.log(recipe);
 
   return (
-    <Wrapper className="mt-[10rem] mb-[5rem]">
+    <Wrapper className="mt-[5rem] mb-[5rem]">
       <div>
-        <h2 className="mb-8 text-xl">{recipe.title}</h2>
+        <h2 className="mb-8 text-3xl">{recipe.title}</h2>
+        <div className=" z-10 relative top-[40px] left-[25px]  w-[90%] flex items-center justify-between flex-row">
+          <div className="w-[25px]">
+            {recipe.vegetarian ? (
+              <img
+                src="https://www.clipartmax.com/png/middle/165-1650927_veg-symbol.png"
+                alt="veg"
+                className="w-[100%] "
+              />
+            ) : (
+              <img
+                src="https://w7.pngwing.com/pngs/815/552/png-transparent-lentil-soup-veggie-burger-vegetarianism-vegetarian-and-non-vegetarian-marks-non-veg-food-miscellaneous-angle-food-thumbnail.png"
+                alt="non-veg"
+                className="w-[100%]"
+              />
+            )}
+          </div>
+          <div className="flex items-center gap-[4px] text-slate-700 ">
+            <CiClock2 style={{ color: "white" }} />
+            {recipe.readyInMinutes}
+            :min
+          </div>
+        </div>
         <img src={recipe.image} alt={recipe.title} />
       </div>
       <Details className="ml-8">
@@ -44,18 +68,22 @@ const Recipe = () => {
         </button>
 
         {active === "instructions" && (
-          <div>
+          <div className="flex items-start mt-[50px] flex-col justify-center ">
+            <h2 className="text-2xl">Instructions</h2>
             <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
             <p dangerouslySetInnerHTML={{ __html: recipe.instructions }}></p>
           </div>
         )}
 
         {active === "ingredients" && (
-          <ul>
-            {recipe.extendedIngredients.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.original}</li>
-            ))}
-          </ul>
+          <div className="flex items-start mt-[50px] flex-col justify-center ">
+            <h2 className="text-2xl">Ingredients</h2>
+            <ol>
+              {recipe.extendedIngredients.map((ingredient) => (
+                <li key={ingredient.id}>{ingredient.original}</li>
+              ))}
+            </ol>
+          </div>
         )}
       </Details>
     </Wrapper>

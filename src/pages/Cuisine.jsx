@@ -19,7 +19,7 @@ const Cuisine = () => {
     getCuisine(params.type);
     // console.log(params.type);
   }, [params.type]);
-  //   console.log(cuisine);
+  //console.log(cuisine);
 
   return (
     <motion.div

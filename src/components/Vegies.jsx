@@ -1,5 +1,7 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css/core";
 import React, { useEffect, useState } from "react";
+import { CiClock2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 const Vegies = () => {
@@ -33,7 +35,7 @@ const Vegies = () => {
         <Splide
           options={{
             perPage: 4,
-            arrows: false,
+            arrows: true,
             pagination: false,
             drag: "free",
             gap: "2rem",
@@ -43,22 +45,29 @@ const Vegies = () => {
             <SplideSlide key={recipe.id}>
               <div className="min-h-[15rem] rounded-3xl overflow-hidden relative">
                 <Link to={`/recipe/${recipe.id}`}>
-                  <div className="absolute z-10 left-[5%] top-[5%] w-[25px] ">
-                    {recipe.vegetarian ? (
-                      <img
-                        src="https://www.clipartmax.com/png/middle/165-1650927_veg-symbol.png"
-                        alt="veg"
-                        className="w-[100%] "
-                      />
-                    ) : (
-                      <img
-                        src="https://w7.pngwing.com/pngs/815/552/png-transparent-lentil-soup-veggie-burger-vegetarianism-vegetarian-and-non-vegetarian-marks-non-veg-food-miscellaneous-angle-food-thumbnail.png"
-                        alt="non-veg"
-                        className="w-[100%]"
-                      />
-                    )}
+                  <div className="absolute z-10 left-[5%] top-[5%]  w-[90%] flex items-center justify-between flex-row">
+                    <div className="w-[25px]">
+                      {recipe.vegetarian ? (
+                        <img
+                          src="https://www.clipartmax.com/png/middle/165-1650927_veg-symbol.png"
+                          alt="veg"
+                          className="w-[100%] "
+                        />
+                      ) : (
+                        <img
+                          src="https://w7.pngwing.com/pngs/815/552/png-transparent-lentil-soup-veggie-burger-vegetarianism-vegetarian-and-non-vegetarian-marks-non-veg-food-miscellaneous-angle-food-thumbnail.png"
+                          alt="non-veg"
+                          className="w-[100%]"
+                        />
+                      )}
+                    </div>
+                    <div className="flex items-center gap-[4px] text-slate-700 ">
+                      <CiClock2 style={{ color: "white" }} />
+                      {recipe.readyInMinutes}
+                      :min
+                    </div>
                   </div>
-                  <p className="absolute z-10 left-2/4 bottom-0 -translate-x-1/2 -translate-y-0  text-white w-[100%] text-center font-semibold h-[10%] flex justify-center items-center text-sm">
+                  <p className="absolute z-10 left-2/4 bottom-[25px] -translate-x-1/2 -translate-y-0  text-white w-[100%] text-center font-semibold h-[10%] flex justify-center items-center text-sm">
                     {recipe.title}
                   </p>
 
