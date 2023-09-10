@@ -8,15 +8,15 @@ const Recipe = () => {
   const [active, setActive] = useState("instructions");
   const params = useParams();
 
-  const fetchResults = async () => {
-    const api = await fetch(
-      `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-    );
-    const data = await api.json();
-    setRecipe(data);
-  };
-
   useEffect(() => {
+    const fetchResults = async () => {
+      const api = await fetch(
+        `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      );
+      const data = await api.json();
+      setRecipe(data);
+    };
+
     fetchResults();
   }, [params.name]);
   // console.log(recipe);

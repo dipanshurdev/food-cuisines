@@ -16,7 +16,7 @@ const Footer = () => {
           <a
             href="https://www.github.com/amanr-dev"
             target="_blank"
-            rel="norefferer"
+            rel="noreferrer"
             id="myName"
           >
             @aman rawat
