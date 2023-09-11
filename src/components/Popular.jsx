@@ -6,28 +6,49 @@ import { CiClock2 } from "react-icons/ci";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const getPopular = async () => {
-    const isPopular = localStorage.getItem("popular");
+  // const getPopular = async () => {
+  //   const isPopular = localStorage.getItem("popular");
 
-    if (isPopular) {
-      setPopular(JSON.parse(isPopular));
-    } else {
+  //   if (isPopular) {
+  //     setPopular(JSON.parse(isPopular));
+  //   } else {
+  //     const api =
+  //       await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=28
+  //      `);
+  //     const data = await api.json();
+  //     setPopular(data.recipes);
+
+  //     localStorage.setItem("popular", JSON.stringify(data.recipes));
+  //   }
+  // };
+
+  // console.log(popular);
+
+  useEffect(() => {
+    setLoading(true);
+    const getPopular = async () => {
       const api =
         await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=28
        `);
       const data = await api.json();
       setPopular(data.recipes);
+      setLoading(false);
+    };
 
-      localStorage.setItem("popular", JSON.stringify(data.recipes));
-    }
-  };
-
-  // console.log(popular);
-
-  useEffect(() => {
     getPopular();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-[25%]">
+        <h5 className="text-center text-slate-700 font-bold">
+          Wait while we fetching data...
+        </h5>
+      </div>
+    );
+  }
 
   return (
     <>

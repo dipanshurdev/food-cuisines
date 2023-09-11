@@ -6,28 +6,51 @@ import { Link } from "react-router-dom";
 
 const Vegies = () => {
   const [veggie, setVeggie] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const getVeggie = async () => {
-    const isVeggie = localStorage.getItem("veggie");
+  // Removed localstorage
+  // const getVeggie = async () => {
+  //   const isVeggie = localStorage.getItem("veggie");
 
-    if (isVeggie) {
-      setVeggie(JSON.parse(isVeggie));
-    } else {
-      const api =
-        await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=28&tags=vegetarian
-       `);
-      const data = await api.json();
-      setVeggie(data.recipes);
+  //   if (isVeggie) {
+  //     setVeggie(JSON.parse(isVeggie));
+  //   } else {
+  //     const api =
+  //       await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=28&tags=vegetarian
+  //      `);
+  //     const data = await api.json();
+  //     setVeggie(data.recipes);
 
-      localStorage.setItem("veggie", JSON.stringify(data.recipes));
-    }
-  };
+  //     localStorage.setItem("veggie", JSON.stringify(data.recipes));
+  //   }
+  // };
 
   // console.log(veggie);
 
   useEffect(() => {
+    setLoading(true);
+    const getVeggie = async () => {
+      const api =
+        await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=28&tags=vegetarian
+         `);
+      const data = await api.json();
+      setVeggie(data.recipes);
+      setLoading(false);
+    };
+
     getVeggie();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-[25%]">
+        <h5 className="text-center text-slate-700 font-bold">
+          Wait while we fetching data...
+        </h5>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="my-4 ">
