@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Popular from "../components/Popular";
 import Vegies from "../components/Vegies";
 import { motion } from "framer-motion";
 
 const Home = () => {
+  useEffect(() => {
+    window.document.title = "Cuisines";
+  }, []);
+
   return (
     <motion.div
       animate={{ opacity: 1 }}

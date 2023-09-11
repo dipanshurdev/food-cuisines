@@ -5,21 +5,33 @@ import { Link, useParams } from "react-router-dom";
 const Cuisine = () => {
   let params = useParams();
   const [cuisine, setCuisine] = useState([]);
-
-  const getCuisine = async (name) => {
-    const data = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}&number=40`
-    );
-    const recipes = await data.json();
-    //     console.log(recipes.results);
-    setCuisine(recipes.results);
-  };
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const getCuisine = async (name) => {
+      setLoading(true);
+      const data = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}&number=40`
+      );
+      const recipes = await data.json();
+      // console.log(params.type);
+      setCuisine(recipes.results);
+      setLoading(false);
+      window.document.title = `cuisines | ${params.type}`;
+    };
     getCuisine(params.type);
     // console.log(params.type);
   }, [params.type]);
-  //console.log(cuisine);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-[25%]">
+        <h5 className="text-center text-slate-700 font-bold">
+          Wait while we fetching data...
+        </h5>
+      </div>
+    );
+  }
 
   return (
     <motion.div

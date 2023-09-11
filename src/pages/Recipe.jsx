@@ -6,20 +6,33 @@ import { styled } from "styled-components";
 const Recipe = () => {
   const [recipe, setRecipe] = useState({});
   const [active, setActive] = useState("instructions");
+  const [loading, setLoading] = useState(false);
   const params = useParams();
 
   useEffect(() => {
     const fetchResults = async () => {
+      setLoading(true);
       const api = await fetch(
         `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
       );
       const data = await api.json();
       setRecipe(data);
+      setLoading(false);
     };
 
     fetchResults();
   }, [params.name]);
-  // console.log(recipe);
+  // console.log();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-[25%]">
+        <h5 className="text-center text-slate-700 font-bold">
+          Wait while we fetching data...
+        </h5>
+      </div>
+    );
+  }
 
   return (
     <Wrapper className="mt-[5rem] mb-[5rem]">
