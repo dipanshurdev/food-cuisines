@@ -42,13 +42,7 @@ const Vegies = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center mt-[25%]">
-        <h5 className="text-center text-slate-700 font-bold">
-          Wait while we fetching data...
-        </h5>
-      </div>
-    );
+    return <h5 className="text-center text-slate-700 font-bold">.....</h5>;
   }
 
   return (
