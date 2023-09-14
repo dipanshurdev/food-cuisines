@@ -35,6 +35,9 @@ const FormStyle = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 490px) {
+    margin: 1rem 0rem;
+  }
 
   input {
     background: linear-gradient(35deg, #494949, #313131);

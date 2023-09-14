@@ -108,6 +108,10 @@ export default Recipe;
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 500px 1fr;
+  @media screen and (max-width: 490px) {
+    grid-template-rows: 400px 1fr;
+    grid-template-columns: none;
+  }
 `;
 
 const Details = styled.div`

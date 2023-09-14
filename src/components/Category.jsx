@@ -1,4 +1,5 @@
 import React from "react";
+// import { useEffect, useState } from "react";
 import { FaPizzaSlice, FaHamburger, FaHotdog } from "react-icons/fa";
 import {
   GiNoodles,
@@ -11,19 +12,23 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import Samosa from "../img/icons8-samosa-50.png";
+import { CuisineContext } from "../context";
 
 const Category = () => {
+  const { isMobile } = React.useContext(CuisineContext);
+  // console.log(isMobile);
+
   return (
     <>
       <Splide
         options={{
-          perPage: 5,
+          perPage: isMobile <= 490 ? 4 : 5,
           arrows: true,
           pagination: false,
           drag: "free",
           speed: 0.8,
         }}
-        className="flex items-center justify-center mx-40 px-12 mb-6"
+        className="flex items-center justify-evenly max-tablet:max:mx-0 max-tablet:px-0 desktop:mx-40 desktop:px-12 mb-6 max-mobile:px-[40px]"
       >
         <SplideSlide>
           <Link to={"/cuisine/italian"}>
@@ -57,6 +62,7 @@ const Category = () => {
               src={Samosa}
               alt="indian-cuisine"
               style={{ filter: "invert(1)" }}
+              className="max-mobile:w-[35px]"
             />
             <h4 className="text-white active:text-white text-sm">Indian</h4>
           </Link>
@@ -105,6 +111,11 @@ const Link = styled(NavLink)`
   height: 6rem;
   cursor: pointer;
   transform: scale(0.8);
+  @media screen and (max-width: 490px) {
+    margin-right: 10px;
+    height: 5rem;
+    width: 5rem;
+  }
 
   svg {
     font-size: 1.5rem;

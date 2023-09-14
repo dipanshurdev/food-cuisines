@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 // import { GiKnifeFork } from "react-icons/gi";
 import Logo from "./img/android-chrome-512x512.png";
 import Footer from "./components/Footer";
+
 const App = () => {
   return (
     <>

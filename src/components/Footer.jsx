@@ -10,9 +10,11 @@ const Footer = () => {
         <span className="text-slate-700"> &copy;cuisines </span>
       </div>
       <div className="text-slate-700 flex flex-row">
-        <p className="text-sm">Terms & Conditions apply </p>
-        <p className="text-sm">
-          All rights reserved{" "}
+        <p className="text-sm max-mobile:text-xs  max-mobile:mx-[10px]">
+          Terms & Conditions apply{" "}
+        </p>
+        <p className="text-sm max-mobile:text-xs max-mobile:mx-[10px]">
+          All rights reserved
           <a
             href="https://www.github.com/amanr-dev"
             target="_blank"
@@ -36,4 +38,7 @@ const FooterWrapper = styled.footer`
   flex-direction: row;
   padding: 15px 0px;
   margin: 50px 0px 10px 0px;
+  @media screen and (max-width: 490px) {
+    flex-direction: column;
+  }
 `;

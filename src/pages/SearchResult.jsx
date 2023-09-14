@@ -39,7 +39,7 @@ export const SearchResult = () => {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-8">
+    <div className="grid grid-cols-4 max-mobile:grid-cols-2 max-mobile:gap-2 gap-8">
       {searchResult.map((item) => (
         <div key={item.id}>
           <Link to={`/recipe/${item.id}`}>

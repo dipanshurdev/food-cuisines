@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SplideSlide, Splide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
 import { CiClock2 } from "react-icons/ci";
+import { CuisineContext } from "../context";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { isMobile } = useContext(CuisineContext);
 
   // const getPopular = async () => {
   //   const isPopular = localStorage.getItem("popular");
@@ -43,9 +45,7 @@ const Popular = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center mt-[25%]">
-        <h5 className="text-center text-slate-700 font-bold">
-          Wait while we fetching data...
-        </h5>
+        <h5 className="text-center text-slate-700 font-bold">Wait while we</h5>
       </div>
     );
   }
@@ -56,19 +56,19 @@ const Popular = () => {
         <h3 className="text-slate-700">Popular Recipies</h3>
         <Splide
           options={{
-            perPage: 4,
+            perPage: isMobile <= 490 ? 2 : 4,
             arrows: true,
             pagination: false,
             drag: "free",
-            gap: "2rem",
+            gap: isMobile <= 490 ? "1rem" : "2rem",
           }}
         >
           {popular.map((recipe) => (
             <SplideSlide key={recipe.id}>
-              <div className="min-h-[15rem] rounded-3xl overflow-hidden relative">
+              <div className="desktop:min-h-[15rem] max-mobile:min-h-[10rem] max-mobile:min-w-[10rem] rounded-3xl overflow-hidden relative">
                 <Link to={`/recipe/${recipe.id}`}>
                   <div className="absolute z-10 left-[5%] top-[5%]  w-[90%] flex items-center justify-between flex-row">
-                    <div className="w-[25px]">
+                    <div className="desktop:w-[25px] max-mobile:w-[15px]">
                       {recipe.vegetarian ? (
                         <img
                           src="https://www.clipartmax.com/png/middle/165-1650927_veg-symbol.png"
@@ -83,13 +83,13 @@ const Popular = () => {
                         />
                       )}
                     </div>
-                    <div className="flex items-center gap-[4px] text-slate-700 ">
+                    <div className="flex max-mobile:flex-col items-center gap-[2px] text-slate-700 text-sm">
                       <CiClock2 style={{ color: "white" }} />
                       {recipe.readyInMinutes}
                       :min
                     </div>
                   </div>
-                  <p className="absolute z-10 left-2/4 bottom-[25px] -translate-x-1/2 -translate-y-0  text-white w-[100%] text-center font-semibold h-[10%] flex justify-center items-center text-sm">
+                  <p className="absolute z-10 left-2/4 bottom-[25px] -translate-x-1/2 max-mobile:-translate-x-[55%] -translate-y-0  text-white w-[100%] text-center font-semibold h-[10%] flex justify-center items-center text-sm">
                     {recipe.title}
                   </p>
                   <img
@@ -97,7 +97,7 @@ const Popular = () => {
                     alt={recipe.title}
                     className="rounded-3xl absolute object-cover left-0 h-[100%] w-[100%]"
                   />
-                  <div className="z-[3] absolute w-[100%] h-[20%] bg-gradient-to-tr from-[#413a3a33] to-[#ffffff42] top-[180px]" />
+                  <div className="z-[3] absolute w-[100%] h-[20%] max-mobile:h-[35%] max-mobile:top-[95px] bg-gradient-to-tr from-[#413a3a33] to-[#ffffff42] top-[180px]" />
                 </Link>
               </div>
             </SplideSlide>

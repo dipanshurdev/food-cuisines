@@ -39,7 +39,7 @@ const Cuisine = () => {
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-      className="grid grid-cols-4 gap-8"
+      className="grid grid-cols-4 max-mobile:grid-cols-2 max-mobile:gap-4 gap-8"
     >
       {cuisine.map((item) => (
         <div key={item.id}>
