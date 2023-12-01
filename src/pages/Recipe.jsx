@@ -62,7 +62,7 @@ const Recipe = () => {
         </div>
         <img src={recipe.image} alt={recipe.title} />
       </div>
-      <Details className="ml-8">
+      <Details className="ml-8 mt-8">
         <button
           onClick={() => setActive("instructions")}
           className={`${
