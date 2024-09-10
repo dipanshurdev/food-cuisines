@@ -16,12 +16,12 @@ const Footer = () => {
         <p className="text-sm max-mobile:text-xs max-mobile:mx-[10px]">
           All rights reserved
           <a
-            href="https://www.github.com/amanr-dev"
+            href="https://www.github.com/dipanshurdev"
             target="_blank"
             rel="noreferrer"
             id="myName"
           >
-            @aman rawat
+            @Dipanshu rawat
           </a>
         </p>
       </div>
